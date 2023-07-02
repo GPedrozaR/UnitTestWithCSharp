@@ -22,7 +22,7 @@ namespace CalculadoraTest
         }
 
         [Fact]
-        public void NumberIsPairTest()
+        public void NumberIsPairTestWithoutParam()
         {
             var numberOne = 1;
             var numberTwo = 2;
@@ -32,6 +32,25 @@ namespace CalculadoraTest
 
             Assert.True(numberOneIsPair);
             Assert.True(numberTwoIsPair);
+        }
+
+        [Theory]
+        [InlineData(2)]
+        [InlineData(3)]
+        [InlineData(4)]
+        [InlineData(5)]
+        [InlineData(6)]
+        public void NumberIsPairTestWithParam(int number)
+        {
+            var numberOneIsPair = _method.NumberIsPair(number);
+            Assert.True(numberOneIsPair);
+        }
+
+        [Theory]
+        [InlineData(new int[] { 2, 3, 4, 5, 6, 7, 8 })]
+        public void NumberIsPairTestWithParams(int[] numbers)
+        {
+            Assert.All(numbers, num => Assert.True(_method.NumberIsPair(num)));
         }
     }
 }
